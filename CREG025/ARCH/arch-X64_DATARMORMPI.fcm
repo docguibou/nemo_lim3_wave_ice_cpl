@@ -1,0 +1,62 @@
+# Caparmor  SGI  at Ifremer
+#
+# NCDF_HOME   root directory containing lib and include subdirectories for netcdf4
+# HDF5_HOME   root directory containing lib and include subdirectories for HDF5
+# XIOS_HOME   root directory containing lib for XIOS
+# OASIS_HOME  root directory containing lib for OASIS
+#
+# NCDF_INC    netcdf4 include file
+# NCDF_LIB    netcdf4 library
+# XIOS_INC    xios include file    (taken into accound only if key_iomput is activated)
+# XIOS_LIB    xios library         (taken into accound only if key_iomput is activated)
+# OASIS_INC   oasis include file   (taken into accound only if key_oasis3 is activated)
+# OASIS_LIB   oasis library        (taken into accound only if key_oasis3 is activated)
+#
+# FC          Fortran compiler command
+# FCFLAGS     Fortran compiler flags
+# FFLAGS      Fortran 77 compiler flags
+# LD          linker
+# LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries
+# FPPFLAGS    pre-processing flags
+# AR          assembler
+# ARFLAGS     assembler flags
+# MK          make
+# USER_INC    complete list of include files
+# USER_LIB    complete list of libraries to pass to the linker
+#
+# Note that:
+#  - unix variables "$..." are accepted and will be evaluated before calling fcm.
+#  - fcm variables are starting with a % (and not a $)
+#
+%NCDF_HOME           $NETCDF_DIR
+%HDF5_HOME           $NETCDF_DIR
+#%XIOS_HOME           /home1/datahome/ctalandi/DEV/XIOS/xios-2.0_r952
+%XIOS_HOME           /home1/datahome/gboutin/XIOS2
+#%XIOS_HOME            /home1/datahome/xcouvela/XIOS/xios-2.0-mpt-oasis
+#%XIOS_HOME            /home1/datahome/xcouvela/XIOS/xios-2.0-mpt
+%OASIS_HOME          /home1/datahome/gboutin/OASIS3-MCT_2.0_branch/oasis3-mct/compile_oa3-mct_gfopenmpi
+#%OASIS_HOME           /home1/datahome/xcouvela/OASIS3-MCT_2.0_branch/oasis3-mct/compile_oa3-mct_gfopenmpi
+
+%NCDF_INC            -I%NCDF_HOME/include 
+%NCDF_LIB            -L%NCDF_HOME/lib -lnetcdff -lnetcdf  -lhdf5_hl -lhdf5 -lhdf5 -lz -lcurl
+%XIOS_INC            -I%XIOS_HOME/inc 
+%XIOS_LIB            -L%XIOS_HOME/lib -lxios
+%OASIS_INC           -I%OASIS_HOME/build/lib/psmile.MPI1 -I%OASIS_HOME/build/lib/mct
+%OASIS_LIB           -L%OASIS_HOME/lib -lpsmile.MPI1 -lmct -lmpeu -lscrip
+
+
+%CPP	             fpp
+%FC                  mpif90 
+%FCFLAGS             -i4 -r8 -O2 -fp-model precise
+#%FCFLAGS             -i4 -r8 -O2 -fp-model precise -init=zero -init=arrays
+#%FCFLAGS             -i4 -r8 -g -fpe0 -traceback -CB -O2 -fp-model precise  
+%FFLAGS              %FCFLAGS
+%LD                  mpif90
+%LDFLAGS             -lstdc++ -lmpi 
+%FPPFLAGS            -P -C -traditional
+%AR                  ar
+%ARFLAGS             rs
+%MK                  gmake
+%USER_INC            %XIOS_INC %OASIS_INC %NCDF_INC
+%USER_LIB            %XIOS_LIB %OASIS_LIB %NCDF_LIB
+
