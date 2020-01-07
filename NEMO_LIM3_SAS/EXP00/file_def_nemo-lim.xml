@@ -9,7 +9,7 @@
 ============================================================================================================
   -->
     
-    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
+    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1ts" min_digits="4">
     
     
       <file_group id="1ts" output_freq="1ts"  output_level="10" enabled=".TRUE.">  <!-- 1 timestep files -->   	
@@ -33,6 +33,21 @@
         <field field_ref="idive"            name="sidive" />
         <field field_ref="ishear"           name="sishea" />
         <field field_ref="icestr"           name="sistre" />
+        <field field_ref="utau_wice"        name="sitwix" />
+        <field field_ref="vtau_wice"        name="sistwiy"/>
+        <field field_ref="utau_ice"         name="sistaix"/>
+        <field field_ref="vtau_ice"         name="sistaiy"/>
+        <field field_ref="icef_r"           name="sicef_r" />
+        <field field_ref="icef_s"           name="sicef_s" />
+        <field field_ref="icefldmax"        name="sifldmax"/>
+        <field field_ref="qt_ice"           name="sqtotice"/>
+        <field field_ref="qsr_ice"          name="sqsolice"/>
+        <field field_ref="qns_ice"          name="sqnsolice"/>
+        <field field_ref="vfxlam"           name="silatmelt"/>
+        <field field_ref="vfxbom"           name="sibomelt"/>
+        <field field_ref="vfxsum"           name="sisumelt"/>
+        <field field_ref="isst"             name="sisst"/>
+        <field field_ref="isss"             name="sisss"/>
         <!-- categories -->
         <field field_ref="snowthic_cat"     name="snthicat"/>
         <field field_ref="iceconc_cat"      name="siconcat"/>
@@ -42,6 +57,7 @@
         <field field_ref="brinevol_cat"     name="sibricat"/>
         <field field_ref="icetemp_cat"      name="sitemcat"/>
         <field field_ref="snwtemp_cat"      name="sntemcat"/>
+        <field field_ref="icefloes_cat"     name="siceflcat"/>
 
         </file>
 

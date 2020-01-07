@@ -14,9 +14,9 @@
           <variable id="buffer_size_factor"        type="double">1.0</variable>
 	  -->
 	  <variable id="info_level"                type="int">10</variable>
-	  <variable id="using_server"              type="bool">true</variable>
-	  <variable id="using_oasis"               type="bool">false</variable>
-	  <variable id="oasis_codes_id"            type="string" >oceanx</variable>
+	  <variable id="using_server"              type="bool">false</variable>
+	  <variable id="using_oasis"               type="bool">true</variable>
+	  <variable id="oasis_codes_id"            type="string">sas</variable>
 	
       </variable_definition>
   </context>
@@ -25,8 +25,7 @@
 <!-- NEMO  CONTEXT add and suppress the components you need                                       -->
 <!-- ============================================================================================ -->
 
-  <context id="nemo" src="./context_nemo.xml"/>       <!--  NEMO       -->
-  <context id="1_nemo" src="./1_context_nemo.xml"/>
+  <context id="sas" src="./context_sas.xml"/>       <!--  NEMO       -->
 <!--
   <context id="2_nemo" src="./2_context_nemo.xml"/>  
 -->

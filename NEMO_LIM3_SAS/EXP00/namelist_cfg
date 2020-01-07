@@ -13,7 +13,7 @@
    nn_no       =       0      !  job number (no more used...)
    cn_exp      =  "SASBIPER"  !  experience name
    nn_it000    =       1      !  first time step
-   nn_itend    =    10100     !  last  time step (std 5475)
+   nn_itend    =    780     !  last  time step (std 5475)
 /
 !-----------------------------------------------------------------------
 &namcfg     !   parameters of the configuration
