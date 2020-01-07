@@ -1,0 +1,86 @@
+!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+!! LIM3 namelist:  
+!!              1 - Generic parameters                 (namicerun)
+!!              2 - Diagnostics                        (namicediag)
+!!              3 - Ice initialization                 (namiceini)
+!!              4 - Ice discretization                 (namiceitd)
+!!              5 - Ice dynamics and transport         (namicedyn)
+!!              6 - Ice diffusion                      (namicehdf)
+!!              7 - Ice thermodynamics                 (namicethd)
+!!              8 - Ice salinity                       (namicesal)
+!!              9 - Ice mechanical redistribution      (namiceitdme)
+!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+!
+!------------------------------------------------------------------------------
+&namicerun     !   Generic parameters
+!------------------------------------------------------------------------------
+   jpl              =    1          !  number of ice  categories
+   nlay_i           =    1          !  number of ice  layers
+   ln_limthd        =  .false.       !  ice thermo   (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   ln_limdyn        =  .true.       !  ice dynamics (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   nn_limdyn        =   0           !     (ln_limdyn=T) switch for ice dynamics
+                                    !      2: total
+                                    !      1: advection only (no diffusion, no ridging/rafting)
+                                    !      0: advection only (as 1 but with prescribed velocity, bypass rheology)
+   rn_uice          =   0.5    !     (nn_limdyn=0) ice u-velocity
+   rn_vice          =   0.0    !     (nn_limdyn=0) ice v-velocity
+/
+!------------------------------------------------------------------------------
+&namicediag    !   Diagnostics
+!------------------------------------------------------------------------------
+/
+!------------------------------------------------------------------------------
+&namiceini     !   Ice initialization
+!------------------------------------------------------------------------------
+                  ! -- limistate -- !
+   ln_limini      = .false.         !  activate ice initialization (T) or not (F)
+   ln_limini_file = .false.         !  netcdf file provided for initialization (T) or not (F)
+   cn_dir="./"
+   sn_hti = 'initice'    , -12 ,'hti'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_hts = 'initice'    , -12 ,'hts'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_ati = 'initice'    , -12 ,'ati'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_tsu = 'initice'    , -12 ,'tsu'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_tmi = 'initice'    , -12 ,'tmi'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_smi = 'initice'    , -12 ,'smi'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+/
+!------------------------------------------------------------------------------
+&namiceitd     !   Ice discretization
+!------------------------------------------------------------------------------
+/
+!------------------------------------------------------------------------------
+&namicedyn     !   Ice dynamics and transport
+!------------------------------------------------------------------------------
+                  ! -- limtrp & limadv -- !
+   nn_limadv      =    0            !  choose the advection scheme (-1=Prather ; 0=Ultimate-Macho)
+   nn_limadv_ord  =    5            !  choose the order of the advection scheme (if nn_limadv=0)
+/
+!------------------------------------------------------------------------------
+&namicehdf     !   Ice horizontal diffusion
+!------------------------------------------------------------------------------
+/
+!------------------------------------------------------------------------------
+&namicethd     !   Ice thermodynamics
+!------------------------------------------------------------------------------
+                  ! -- limthd_dh -- !
+   ln_limdH       = .true.          !  activate ice thickness change from growing/melting (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+                  ! -- limthd_da -- !
+   ln_limdA       = .true.          !  activate lateral melting param. (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+                 ! -- limthd_lac -- !
+   ln_limdO       = .true.          !  activate ice growth in open-water (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   rn_hnewice     = 0.02            !  thickness for new ice formation in open water (m)
+                  ! -- limitd_th -- !
+   rn_himin       = 0.01            !  minimum ice thickness (m) used in remapping, must be smaller than rn_hnewice
+/
+!------------------------------------------------------------------------------
+&namicesal     !   Ice salinity
+!------------------------------------------------------------------------------
+                 ! -- limthd_sal -- !
+   ln_limdS       = .true.          !  activate gravity drainage and flushing (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+/
+!------------------------------------------------------------------------------
+&namiceitdme   !   Ice mechanical redistribution (ridging and rafting)
+!------------------------------------------------------------------------------
+                  ! -- limitd_me -- !
+   ln_ridging     =   .true.        !  ridging activated (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   ln_rafting     =   .true.        !  rafting activated (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+/

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+    <!-- $id$ -->
+    
+ <!--
+============================================================================================================
+=                                           output files definition                                        =
+=                                            Define your own files for lim3                                =
+=                                         put the variables you want...                                    =
+============================================================================================================
+  -->
+    
+    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
+    
+    
+      <file_group id="1ts" output_freq="1ts"  output_level="10" enabled=".TRUE.">  <!-- 1 timestep files -->   	
+
+	<file id="file1" name_suffix="_icemod" description="ice variables" enabled=".true." >
+
+        <field field_ref="snowthic_cea"     name="snthic"     long_name="surface_snow_thickness"   />
+        <field field_ref="snowvol"          name="snvolu" />
+        <field field_ref="isnowhc"          name="snheco" />
+
+        <field field_ref="icethic_cea"      name="sithic"     long_name="sea_ice_thickness"        />
+        <field field_ref="icevolu"          name="sivolu" />
+        <field field_ref="iceconc"          name="siconc"  />
+        <field field_ref="micesalt"         name="sisali" />
+        <field field_ref="micet"            name="sitemp" />
+        <field field_ref="icest"            name="sistem" />
+        <field field_ref="icehc"            name="siheco" />
+        <field field_ref="uice_ipa"         name="sivelu" />
+        <field field_ref="vice_ipa"         name="sivelv" />
+        <field field_ref="icevel"           name="sivelo" />
+        <field field_ref="idive"            name="sidive" />
+        <field field_ref="ishear"           name="sishea" />
+        <field field_ref="icestr"           name="sistre" />
+        <!-- categories -->
+        <field field_ref="snowthic_cat"     name="snthicat"/>
+        <field field_ref="iceconc_cat"      name="siconcat"/>
+        <field field_ref="icethic_cat"      name="sithicat"/>
+        <field field_ref="salinity_cat"     name="salincat"/>
+        <field field_ref="iceage_cat"       name="siagecat"/>
+        <field field_ref="brinevol_cat"     name="sibricat"/>
+        <field field_ref="icetemp_cat"      name="sitemcat"/>
+        <field field_ref="snwtemp_cat"      name="sntemcat"/>
+
+        </file>
+
+      </file_group>
+
+      <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."/> <!-- 1d files -->
+      <file_group id="1h" output_freq="1h"  output_level="10" enabled=".TRUE."/> <!-- 1h files -->
+      <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
+      <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE."/> <!-- 3h files -->     
+      <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
+      <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->        
+      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->   	
+      <file_group id="2m" output_freq="2mo" output_level="10" enabled=".TRUE."/> <!-- real 2m files -->
+      <file_group id="3m" output_freq="3mo" output_level="10" enabled=".TRUE."/> <!-- real 3m files -->
+      <file_group id="4m" output_freq="4mo" output_level="10" enabled=".TRUE."/> <!-- real 4m files -->
+      <file_group id="6m" output_freq="6mo" output_level="10" enabled=".TRUE."/> <!-- real 6m files -->
+      <file_group id="2y"  output_freq="2y" output_level="10" enabled=".TRUE."/> <!-- real 2y files -->
+      <file_group id="5y"  output_freq="5y" output_level="10" enabled=".TRUE."/> <!-- real 5y files -->
+      <file_group id="10y" output_freq="10y" output_level="10" enabled=".TRUE."/> <!-- real 10y files -->
+
+   </file_definition>
