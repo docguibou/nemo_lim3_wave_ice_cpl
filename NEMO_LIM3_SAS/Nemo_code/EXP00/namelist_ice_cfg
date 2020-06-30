@@ -1,0 +1,116 @@
+!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+!! LIM3 namelist:  
+!!              1 - Generic parameters                 (namicerun)
+!!              2 - Diagnostics                        (namicediag)
+!!              3 - Ice initialization                 (namiceini)
+!!              4 - Ice discretization                 (namiceitd)
+!!              5 - Ice dynamics and transport         (namicedyn)
+!!              6 - Ice diffusion                      (namicehdf)
+!!              7 - Ice thermodynamics                 (namicethd)
+!!              8 - Ice salinity                       (namicesal)
+!!              9 - Ice mechanical redistribution      (namiceitdme)
+!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+!
+!------------------------------------------------------------------------------
+&namicerun     !   Generic parameters
+!------------------------------------------------------------------------------
+   jpl              =    1          !  number of ice  categories
+   jpf              =    120         !  number of ice floes categories
+   nlay_i           =    2          !  number of ice  layers
+
+   ln_limthd        =  .true.       !  ice thermo   (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   ln_limdyn        =  .true.       !  ice dynamics (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   nn_limdyn        =   2           !     (ln_limdyn=T) switch for ice dynamics
+                                    !      2: total
+                                    !      1: advection only (no diffusion, no ridging/rafting)
+                                    !      0: advection only (as 1 but with prescribed velocity, bypass rheology)
+   rn_uice          =   0.0    !     (nn_limdyn=0) ice u-velocity
+   rn_vice          =   0.0    !     (nn_limdyn=0) ice v-velocity
+   nn_limfldis      = 2             ! Breaking redistribution
+                                    !      2: Zhang et al. with beta following power-law and rn_flq
+                                    !      1: beta following power-law and rn_flq=0 or 1 for d>dmax
+                                    !      0: beta=1/jpf
+   rn_flq           = -1            ! Breaking redistribution coeff. (nn_limfldis=2)
+/
+!------------------------------------------------------------------------------
+&namicediag    !   Diagnostics
+!------------------------------------------------------------------------------
+   ln_limdiachk   =  .false.        !  check online the heat, mass & salt budgets (T) or not (F)
+   ln_limdiahsb   =  .false.        !  output the heat, mass & salt budgets (T) or not (F)
+/
+!------------------------------------------------------------------------------
+&namiceini     !   Ice initialization
+!------------------------------------------------------------------------------
+                  ! -- limistate -- !
+   ln_limini      = .true.         !  activate ice initialization (T) or not (F)
+   ln_limini_file = .true.         !  netcdf file provided for initialization (T) or not (F)
+   cn_dir="./"
+   sn_hti = 'initice'    , -12 ,'hti'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_hts = 'initice'    , -12 ,'hts'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_ati = 'initice'    , -12 ,'ati'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_tsu = 'initice'    , -12 ,'tsu'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_tmi = 'initice'    , -12 ,'tmi'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+   sn_smi = 'initice'    , -12 ,'smi'   ,  .false.  , .true., 'yearly'  , '' , '', ''
+/
+!------------------------------------------------------------------------------
+&namiceitd     !   Ice discretization
+!------------------------------------------------------------------------------
+   nn_catbnd      =    2           !  computation of ice category boundaries based on
+                                   !      1: tanh function
+                                   !      2: h^(-alpha), function of rn_himean
+   nn_catfbnd     =    1           !  computation of ice floe size category boundaries 
+                                   !      1: Uniform distribution
+                                   !      2: Toyota et al. (2011)  power-law between rn_dmax and rn_dmin (&namicethd)
+   rn_fsdmax        =    1000.     ! Maximum floe size in the model
+   rn_fsdmin        =    8.        ! Minimum floe size in the model (should be equal to rn_dmin for coherence)
+   rn_fsdwidth      =    2.5       ! Minimum floe size in the model (should be equal to rn_dmin for coherence)
+   rn_maxpareto     =    500.      ! Maximum floe size of the last cat. whom width obeys a pareto law (nn_catfbnd=2)
+   rn_catfthresh  =    0.5         ! Parameter for determination of dmax.
+   rn_himean      =    2.0         !  expected domain-average ice thickness (m), nn_catbnd = 2 only
+/
+!------------------------------------------------------------------------------
+&namicedyn     !   Ice dynamics and transport
+!------------------------------------------------------------------------------
+                  ! -- limtrp & limadv -- !
+   nn_limadv      =    -1            !  choose the advection scheme (-1=Prather ; 0=Ultimate-Macho)
+   nn_limadv_ord  =    5            !  choose the order of the advection scheme (if nn_limadv=0)
+                  ! -- limitd_me -- !
+   ln_icestr_fl  =    .false.      !     ice strength function floe size volume (T) or not (F)
+   rn_icestr_c1  = 0.05 !
+   rn_icestr_c2  = 0.35 !
+/
+!------------------------------------------------------------------------------
+&namicehdf     !   Ice horizontal diffusion
+!------------------------------------------------------------------------------
+/
+!------------------------------------------------------------------------------
+&namicethd     !   Ice thermodynamics
+!------------------------------------------------------------------------------
+                  ! -- limthd_dh -- !
+   ln_limdH       = .false.          !  activate ice thickness change from growing/melting (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+                  ! -- limthd_da -- !
+   ln_limdA       = .true.          !  activate lateral melting param. (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   nn_lamp        = 1                ! Parametrisation for lateral melting (0: Lupkes , 1: Dmean from FSD (ONLY ACTIVATE IF COUPLED WITH WAVES) )
+                 ! -- limthd_lac -- !
+   ln_limdO       = .false.          !  activate ice growth in open-water (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   rn_hnewice     = 0.02            !  thickness for new ice formation in open water (m)
+                  ! -- limitd_th -- !
+   rn_himin       = 0.01            !  minimum ice thickness (m) used in remapping, must be smaller than rn_hnewice
+/
+!------------------------------------------------------------------------------
+&namicesal     !   Ice salinity
+!------------------------------------------------------------------------------
+                 ! -- limthd_sal -- !
+   ln_limdS       = .false.          !  activate gravity drainage and flushing (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   nn_icesal      =  1              !  ice salinity option
+                                    !     1: constant ice salinity (S=rn_icesal)
+                                    !     2: varying salinity parameterization S(z,t)
+                                    !     3: prescribed salinity profile S(z), Schwarzacher, 1959
+/
+!------------------------------------------------------------------------------
+&namiceitdme   !   Ice mechanical redistribution (ridging and rafting)
+!------------------------------------------------------------------------------
+                  ! -- limitd_me -- !
+   ln_ridging     =   .true.        !  ridging activated (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+   ln_rafting     =   .true.        !  rafting activated (T) or not (F) => DO NOT TOUCH UNLESS U KNOW WHAT U DO
+/
