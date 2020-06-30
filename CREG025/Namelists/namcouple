@@ -1,0 +1,134 @@
+###############################################################################
+#
+#      Input file for OASIS3
+# 
+#      This version is for use with ECHAM5 fluxes and
+#      surface conditions computed in mpi-om.
+#
+#      The file will be edited in the run-script to update it for the 
+#      actual integration period and grid dimensions.
+#
+#      Modified : G. Boutin                 22.11.2017
+#
+###############################################################################
+#  
+#      Input delimiters have to occupy position 1 to 9 !
+#      No blank lines allowed !
+#      Length of input lines <= 80 !
+#
+###############################################################################
+#
+# NFIELDS : total number of fields being exchanged.
+#
+ $NFIELDS
+         6
+ $END
+#
+###############################################################################
+#
+# NBMODEL : number of models and their names (CHAR*6).
+#
+ $NBMODEL
+       3     wwatch oceanx xios.x
+ $END
+#
+###############################################################################
+# 
+# RUNTIME (<I8)
+#         total simulated time for the actual run in seconds
+#         the value will be set before the actual integration
+#
+ $RUNTIME
+       5270400
+ $END
+#
+###############################################################################
+#
+ $NLOGPRT
+ 1  1
+ $END
+#
+###############################################################################
+#
+ $STRINGS
+#
+#
+############################################################################
+#                      OCEAN  --->>>  SAS
+#                      ------------------
+###############################################################################
+#
+#~~~~~~~~~~~
+# Field 1 : Ice fraction NEMO -> WW3 
+#~~~~~~~~~~~
+OIceFrcT WW3__ICE 1 720 1 r-opa.nc EXPORTED
+528 603 528 603 cregt ww3t LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+#
+#~~~~~~~~~~~
+# Field 2 : Ice thickness NEMO -> WW3 
+#~~~~~~~~~~~
+OIceTck WW3__IC1 1 720 1 r-opa.nc EXPORTED
+528 603 528 603 cregt ww3t LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+#
+#~~~~~~~~~~~
+# Field 3 : Ice floes NEMO -> WW3 
+#~~~~~~~~~~~
+O_ICEF_s WW3__IC5 1 720 1 r-opa.nc EXPORTED
+528 603 528 603 cregt ww3t LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+#############################################################################################
+#~~~~~~~~~~~
+# Field 4 : Ice floes  WW3 ->NEMO 
+#~~~~~~~~~~~
+ WW3_ICEF O_ICEF_r 1 720 1 r-ww3.nc EXPORTED
+528 603 528 603 cregt ww3t LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+#~~~~~~~~~~~
+WW3_TWIX O_TAIWX  1 720 1 r-ww3.nc EXPORTED
+528 603 528 603 ww3t cregt LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+#~~~~~~~~~~~
+# Field 5 :  ! send TWIY 
+#~~~~~~~~~~~
+WW3_TWIY O_TAIWY  1 720 1 r-ww3.nc EXPORTED
+528 603 528 603 ww3t cregt LAG=+720
+R  0  R  0
+LOCTRANS
+INSTANT
+#
+#SCRIPR
+#DISTWGT LR SCALAR LATLON 1 4
+#DISTWGT LR SCALAR LATLON 1 4
+$END
