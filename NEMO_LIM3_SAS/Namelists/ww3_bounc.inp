@@ -1,0 +1,74 @@
+$ --------------------------------------------------------------------
+$ WAVEWATCH III NetCDF boundary input processing
+$---------------------------------------------------------------------
+$
+$ Boundary option: READ or WRITE
+$
+$READ
+WRITE
+$
+$ Interpolation method: 1: nearest
+$                       2: linear interpolation
+1
+$ Verbose (0, 1, 2)
+2
+$
+$ List of spectra files. These NetCDF files use the WAVEWATCH III
+$ format as described in the ww3_ounp.inp file. The files are
+$ defined relative to the directory in which the program is run.
+./SPECTRA/ww3.collins_1.nc
+./SPECTRA/ww3.collins_2.nc
+$./SPECTRA/ww3.COLLINS4_2010_spec.nc_1
+$./SPECTRA/ww3.COLLINS4_2010_spec.nc_2
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_strt
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat0
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat1
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat2
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat3
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat4
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat5
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat6
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat7
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat8
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat9
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat10
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat11
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat12
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat13
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat14
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat15
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat16
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat17
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat18
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat19
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat20
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat21
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat22
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat23
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat24
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat25
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat26
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat27
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat28
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat29
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat30
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat31
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat32
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat33
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat34
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat35
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat36
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat37
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat38
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat39
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat40
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat41
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat42
+$../input_IC2/SPECTRA/ww3.201006_spec.nc_stat43
+$
+'STOPSTRING'
+$
+$ --------------------------------------------------------------------
+$ End of input file
+$ --------------------------------------------------------------------
+
